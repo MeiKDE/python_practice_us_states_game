@@ -4,7 +4,7 @@ import pandas
 screen = Screen()
 
 
-class USStateGame(Turtle):
+class USStatesGame(Turtle):
     def __init__(self):
         super().__init__()
         self.data = pandas.read_csv("python_practice_us_states_game/50_states.csv")

@@ -1,16 +1,16 @@
 from turtle import Turtle, Screen
-from usstategame import USStateGame
+from usstatesgame import USStatesGame
 import pandas
 
 screen = Screen()
 turtle = Turtle()
-usstategame = USStateGame()
+usstatesgame = USStatesGame()
 
 screen.title("U.S. States Game")
 image = "python_practice_us_states_game/blank_states_img.gif"
 screen.addshape(image)
 turtle.shape(image)
 
-usstategame.start_game()
+usstatesgame.start_game()
 
 screen.exitonclick()
