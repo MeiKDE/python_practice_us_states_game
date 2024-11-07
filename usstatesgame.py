@@ -29,10 +29,12 @@ class USStatesGame(Turtle):
                 # populate all of the states that the user missed
                 print("User chose to exit")
 
-                # find missing values
-                missing_in_guessed_states_list = list(
-                    set(self.all_states) - set(self.guessed_states)
-                )
+                # find missing states using list comprehension instead
+                missing_in_guessed_states_list = [
+                    state
+                    for state in self.all_states
+                    if state not in self.guessed_states
+                ]
                 new_data = pandas.DataFrame(
                     {"States to Learn": missing_in_guessed_states_list}
                 )
@@ -42,16 +44,15 @@ class USStatesGame(Turtle):
                 break
 
             # 2. check Answer
-            for state in self.all_states:
-                if state_input == state.lower():  # if yes
-                    self.guessed_states.append(state_input)
-                    # -- populateOnMap(x,y) by creating a new turtle text object
-                    map = Turtle()
-                    map.hideturtle()
-                    map.penup()
-                    # locate x an y coordinate from 50 csv file
-                    state_data = self.data[self.data.state == state]
-                    map.goto(state_data.x.item(), state_data.y.item())
-                    map.write(state)
+            if state_input in [state.lower() for state in self.all_states]:
+                self.guessed_states.append(state_input)
+                # -- populateOnMap(x,y) by creating a new turtle text object
+                map = Turtle()
+                map.hideturtle()
+                map.penup()
+                # locate x an y coordinate from 50 csv file
+                state_data = self.data[self.data.state.str.lower() == state_input]
+                map.goto(state_data.x.item(), state_data.y.item())
+                map.write(state_data.state.item())
 
         print("Game Over")
