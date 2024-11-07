@@ -13,4 +13,4 @@ turtle.shape(image)
 
 usstatesgame.start_game()
 
-screen.exitonclick()
+# screen.exitonclick()

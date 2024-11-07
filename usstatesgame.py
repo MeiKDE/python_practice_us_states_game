@@ -22,7 +22,25 @@ class USStatesGame(Turtle):
         while len(self.guessed_states) < 50:
             # 1. ask input: make sure to turn input string into lower case
             state_input = self.get_state_input()
-            print(f"check state_input value: {state_input}")
+            # print(f"check state_input value: {state_input}")
+
+            # Exit the game if user types "exit"
+            if state_input == "exit":
+                # populate all of the states that the user missed
+                print("User chose to exit")
+
+                # find missing values
+                missing_in_guessed_states_list = list(
+                    set(self.all_states) - set(self.guessed_states)
+                )
+                new_data = pandas.DataFrame(
+                    {"States to Learn": missing_in_guessed_states_list}
+                )
+                new_data.to_csv(
+                    "python_practice_us_states_game/states_to_learn.csv", index=False
+                )
+                break
+
             # 2. check Answer
             for state in self.all_states:
                 if state_input == state.lower():  # if yes
